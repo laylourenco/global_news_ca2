@@ -9,6 +9,7 @@ import { NewsResponse } from '../interfaces/news-response';
 })
 export class NewsapiService {
   topHeadlinesPath = environment.baseURL;
+  weatherPath = environment.urlbase_weather;
 
   constructor(private http: HttpClient) {}
 
@@ -19,6 +20,14 @@ export class NewsapiService {
     return this.http.get<NewsResponse>(
       this.topHeadlinesPath +
         `?country=${country}&category=${category}&pageSize=10&apiKey=${environment.apiKey}`
+    );
+  }
+
+  getWeather(city: string): Observable<any> {
+    return this.http.get<any>(
+      `${this.weatherPath}/weather?q=${encodeURIComponent(
+        city
+      )}&appid=${environment.apikey_weather}`
     );
   }
 }

@@ -22,4 +22,9 @@
       <app-news-card [news]="news"></app-news-card>
     </div>
   </div>
+  <div *ngIf="weatherTemp">
+    <h3>Weather: {{ weatherTemp?.weather[0].main }}</h3>
+    <p>Temperature: {{ weatherTemp?.main.temp }}</p>
+    <p>Humidity: {{ weatherTemp?.main.humidity }}</p>
+  </div>
 </ion-content>

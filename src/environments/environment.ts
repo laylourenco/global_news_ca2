@@ -6,6 +6,8 @@ export const environment = {
   production: false,
   baseURL: 'https://newsapi.org/v2/top-headlines/',
   apiKey: '52891e663f8f42bd94ca556ba107e654',
+  urlbase_weather:'https://api.openweathermap.org/data/2.5/',
+  apikey_weather:'50d5a65f15ab71547706a1d272d88a52'
 };
 
 /*
