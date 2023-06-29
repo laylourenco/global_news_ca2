@@ -9,6 +9,12 @@ import { HttpClient } from '@angular/common/http';
 const APIKEY_WEATHER = environment.apikey_weather;
 const URLBASE_WEATHER = environment.urlbase_weather;
 
+interface WeatherResponse {
+  main: {
+    temp: number;
+  };
+}
+
 @Component({
   selector: 'app-folder',
   templateUrl: './folder.page.html',
@@ -18,6 +24,10 @@ export class FolderPage implements OnInit {
   public folder: string;
   newsList: ArticlesEntity[];
   weatherTemp: any;
+  todayDate = new Date();
+  cityName: any;
+  weatherIcon: any;
+  weatherDetails: any;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -40,11 +50,15 @@ export class FolderPage implements OnInit {
 
   loadData() {
     this.httpClient
-      .get(`${URLBASE_WEATHER}/weather?q=Dublin&appid=${APIKEY_WEATHER}`)
-      .subscribe((results: any) => {
+      .get<WeatherResponse>(`${URLBASE_WEATHER}/weather?q=${"Ireland"}&appid=${APIKEY_WEATHER}`)
+      .subscribe(results => {
         console.log(results);
-        this.weatherTemp = results?.main;
+        this.weatherTemp = results['main']
+        this.cityName = results['name']
         console.log(this.weatherTemp);
+        this.weatherDetails = results['weather'][0]
+        console.log(this.weatherDetails);
+        this.weatherIcon = `https://openweathermap.org/img/wn/${this.weatherDetails.icon}@4x.png`
       });
   }
 }
