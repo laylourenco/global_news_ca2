@@ -23,7 +23,7 @@
     </div>
   </div>
   
-  <div *ngIf="folder === 'Weather' && weatherTemp">
+  <div *ngIf="folder.toLowerCase() === 'weather' && weatherTemp">
     <ion-card>
       <ion-item lines="none">
         <p>Today's Weather</p>
